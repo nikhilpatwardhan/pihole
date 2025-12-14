@@ -21,7 +21,17 @@ apt-get upgrade -y
 echo "Install pre-requisities..."
 apt install -y curl
 apt install -y sqlite3
-apt install -y unattended-upgrades apt-listchanges
+apt install -y unattended-upgrades apt-listchanges ufw
+
+echo "Configuring firewall (ufw)..."
+
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow 53/tcp
+ufw allow 53/udp
+ufw allow 80/tcp
+ufw --force enable
 
 echo "Installing PiHole..."
 curl -sSL https://install.pi-hole.net | bash
