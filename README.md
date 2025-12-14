@@ -6,6 +6,15 @@ It is designed for a **fresh system install** and prepares the SBC for unattende
 
 ---
 
+## Hardware Summary
+
+- FriendlyElec NanoPi Zero2
+- ARM Quad-Core Cortex-A53
+- 2 GB RAM
+- SanDisk High Endurance 64 GB microSD card
+
+---
+
 ## Starting point (required)
 
 Before running this script:

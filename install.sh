@@ -21,7 +21,7 @@ apt-get upgrade -y
 echo "Install pre-requisities..."
 apt install -y curl
 apt install -y sqlite3
-apt install -y unattended-upgrades apt-listchanges ufw
+apt install -y unattended-upgrades apt-listchanges ufw powermgmt-base
 
 echo "Configuring firewall (ufw)..."
 
