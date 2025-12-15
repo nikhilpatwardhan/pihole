@@ -8,8 +8,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
-DESIRED_REBOOT="Unattended-Upgrade::Automatic-Reboot "true";"
+DESIRED_REBOOT="Unattended-Upgrade::Automatic-Reboot true;"
 DESIRED_REBOOT_TIME="Unattended-Upgrade::Automatic-Reboot-Time "03:00";"
+DESIRED_UPDATE_AC_POWER="Unattended-Upgrade::OnlyOnACPower false;"
+DESIRED_VERBOSE_LOGGING="Unattended-Upgrade::Verbose true;"
 
 echo "Setting date-time"
 timedatectl set-timezone Asia/Kolkata
@@ -76,8 +78,10 @@ update_existing_line() {
   return 0
 }
 
-update_existing_line 'Unattended-Upgrade::Automatic-Reboot false' "$DESIRED_REBOOT"
+update_existing_line 'Unattended-Upgrade::Automatic-Reboot\s+"?false"?' "$DESIRED_REBOOT"
 update_existing_line 'Unattended-Upgrade::Automatic-Reboot-Time' "$DESIRED_REBOOT_TIME"
+update_existing_line 'Unattended-Upgrade::OnlyOnACPower' "$DESIRED_UPDATE_AC_POWER"
+update_existing_line 'Unattended-Upgrade::Verbose' "$DESIRED_VERBOSE_LOGGING"
 
 systemctl enable apt-daily.timer apt-daily-upgrade.timer
 systemctl restart apt-daily.timer apt-daily-upgrade.timer
